@@ -24,16 +24,16 @@ CREATE TABLE  relacionVehiculos(
     totalFactura VARCHAR(20) DEFAULT NULL,
     aseguradora VARCHAR(20) DEFAULT NULL,
     estadoPoliza VARCHAR(20) DEFAULT NULL,
-    observaciones VARCHAR(100) DEFAULT NULL
+    observaciones VARCHAR(100) DEFAULT NULL,
     PRIMARY KEY (id)
 );
 
 
 INSERT INTO relacion_vehiculos VALUES 
-    (1, 000001 'acapulco', 'Brandon Geovanni', 'Pérez', 'Hernández',
+    (1, 000001, 'acapulco', 'Brandon Geovanni', 'Pérez', 'Hernández',
     2023, 'Cargo 150', 'Blanco', '3H1KA0541PD104548', '21SAT1',  
     '813E8B00T9', 'No aplica', '2023-05-01', 'A31917', '2023-09-06',
-    '33,181.03', '5,308.97', '38,490', 'BBVA', 'Bien', 'comentario' )
+    '33,181.03', '5,308.97', '38,490', 'BBVA', 'Bien', 'comentario' );
 
 
 
@@ -46,7 +46,7 @@ CREATE TABLE  administradores(
     apMaterno VARCHAR(20) DEFAULT NULL,
     correo VARCHAR(20) DEFAULT NULL,
     usuario VARCHAR(20) DEFAULT NULL,
-    pasw VARCHAR(20) DEFAULT NULL
+    pasw VARCHAR(20) DEFAULT NULL,
     PRIMARY KEY (id)
 );
 
@@ -68,7 +68,7 @@ CREATE TABLE  usuarios(
     curp VARCHAR(18) NOT NULL,
     liceConducir(20) DEFAULT NULL,
     sexo VARCHAR(20) DEFAULT NULL,
-    usuario VARCHAR(20) DEFAULT NULL
+    usuario VARCHAR(20) DEFAULT NULL,
     PRIMARY KEY (id)
 );
 
