@@ -1,6 +1,5 @@
 import { pool } from "../db.js";
 
-
 export const getEmployees = async (req, res) =>{
     try{
         const [rows] = await pool.query('SELECT * FROM employee')
@@ -28,7 +27,6 @@ export const getEmployee = async (req, res) =>{
     }
 } 
 
-
 export const createEmployee = async (req, res) => {
     const {nombre, salary} = req.body
     try {
@@ -46,7 +44,6 @@ export const createEmployee = async (req, res) => {
         })
    }
 }
-
 
 export const updateEmployee = async (req, res) => {
     const {id} = req.params
@@ -70,7 +67,6 @@ export const updateEmployee = async (req, res) => {
         })
    }
 }
-
 
 export const deleteEmployee = async (req, res) => {
    try {
