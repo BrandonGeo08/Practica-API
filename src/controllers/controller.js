@@ -1,6 +1,6 @@
 import { pool } from "../db.js";
 
-export const getEmployees = async (req, res) =>{
+export const get = async (req, res) =>{
     try{
         const [rows] = await pool.query('SELECT * FROM relacionvehiculos')
         res.json(rows)
@@ -11,12 +11,12 @@ export const getEmployees = async (req, res) =>{
     } 
 } 
 
-export const getEmployee = async (req, res) =>{
+export const getid = async (req, res) =>{
     try {
         const [rows] = await pool.query('SELECT * FROM relacionvehiculos WHERE id = ?', [req.params.id])
 
         if (rows.length <= 0) return res.status(404).json({
-            message: 'Employee not found'
+            message: 'data not found'
         })
 
         res.json(rows[0])
@@ -27,7 +27,7 @@ export const getEmployee = async (req, res) =>{
     }
 } 
 
-export const createEmployee = async (req, res) => {
+export const create = async (req, res) => {
     const {clvEmpleado, sucursal, nomEmpleado, apPaterno, apMaterno, yearModelo, modelo, colorMoto, numSerie, numPlacas, numPoliza, numInciso, polizaVencimiento, numFactura, fechaFactura, subtotalFactura, ivaFactura, totalFactura, aseguradora, estadoPoliza, observaciones} = req.body;
     try {
         const [rows] = await pool.query(
@@ -64,14 +64,15 @@ export const createEmployee = async (req, res) => {
    }
 }
 
-export const updateEmployee = async (req, res) => {
+export const update = async (req, res) => {
     const {id} = req.params;
     const {clvEmpleado, sucursal, nomEmpleado, apPaterno, apMaterno, yearModelo, modelo, colorMoto, numSerie, numPlacas, numPoliza, numInciso, polizaVencimiento, numFactura, fechaFactura, subtotalFactura, ivaFactura, totalFactura, aseguradora, estadoPoliza, observaciones} = req.body;
 
     try {
         
         const [result] = await pool.query('UPDATE relacionvehiculos SET clvEmpleado = IFNULL(?, clvEmpleado), sucursal = IFNULL(?, sucursal), nomEmpleado = IFNULL(?, nomEmpleado), apPaterno = IFNULL(?, apPaterno), apMaterno = IFNULL(?, apMaterno), yearModelo = IFNULL(?, yearModelo), modelo = IFNULL(?, modelo), colorMoto = IFNULL(?, colorMoto), numSerie = IFNULL(?, numSerie), numPlacas = IFNULL(?, numPlacas), numPoliza = IFNULL(?, numPoliza), numInciso = IFNULL(?, numInciso), polizaVencimiento = IFNULL(?, polizaVencimiento), numFactura = IFNULL(?, numFactura), fechaFactura = IFNULL(?, fechaFactura), subtotalFactura = IFNULL(?, subtotalFactura), ivaFactura = IFNULL(?, ivaFactura), totalFactura = IFNULL(?, totalFactura), aseguradora = IFNULL(?, aseguradora), estadoPoliza = IFNULL(?, estadoPoliza), observaciones = IFNULL(?, observaciones)  WHERE id = ?', 
-        [clvEmpleado, 
+        [
+   clvEmpleado, 
          sucursal, 
          nomEmpleado, 
          apPaterno, 
@@ -93,9 +94,8 @@ export const updateEmployee = async (req, res) => {
          estadoPoliza, 
          observaciones, 
          id])
-   
         if (result.affectedRows === 0) return res.status(404).json ({
-                message: 'Employee not found'
+                message: 'data not found'
             })
 
         const [rows] = await pool.query('SELECT * FROM relacionvehiculos WHERE id =?', [id])
@@ -109,12 +109,12 @@ export const updateEmployee = async (req, res) => {
    }
 }
 
-export const deleteEmployee = async (req, res) => {
+export const del = async (req, res) => {
    try {
         const [result] =  await pool.query('DELETE FROM relacionvehiculos WHERE id = ?', [req.params.id])
    
         if(result.affectedRows <= 0) return res.status(404).json({
-            message: 'Employee not found'
+            message: 'data not found'
         })
 
         res.sendStatus(204)
